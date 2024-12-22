@@ -12,6 +12,8 @@ const Card = ({ prestador, idPrestador }) => {
   const [isFlipped, setIsFlipped] = useState(false);
   const [selectedPrice, setSelectedPrice] = useState(null);
   const cardRef = useRef(null);
+  console.log(prestador);
+  
 
   const name = prestador?.nombre;
 
@@ -40,24 +42,24 @@ const Card = ({ prestador, idPrestador }) => {
     <div ref={cardRef} className={`card ${isFlipped ? "flipped" : ""}`}>
       <div className="card__front">
         <div className="card__img">
-        <img
+        {/* <img
             src={bgCard}
             alt="Card Image"
-          />
-          {/* <img
+          /> */}
+          <img
             src={`${API_URL}${prestador?.fondoPerfil?.data?.attributes?.url}`}
             alt="Card Image"
-          /> */}
+          />
         </div>
         <div className="card__avatar">
-        <img
+        {/* <img
             src={Avatar}
             alt="Avatar"
-          />
-          {/* <img
+          /> */}
+          <img
             src={`${API_URL}${prestador?.avatar?.data?.attributes?.url}`}
             alt="Avatar"
-          /> */}
+          />
         </div>
         <div className="card__title titMai">{prestador?.nombre}</div>
         <div className="card__subtitle">
@@ -70,7 +72,7 @@ const Card = ({ prestador, idPrestador }) => {
                 key={valor?.id}
                 style={{
                   color: "wheat",
-                  borderBottom: "dashed 1px wheat",
+                  borderBottom: "solid 1px wheat",
                   padding: "4px",
                 }}
                 className="titMai"
@@ -96,8 +98,8 @@ const Card = ({ prestador, idPrestador }) => {
             onClick={handleFlip}
             isDisabled={!selectedPrice}
             style={{
-              backgroundColor: "#e5b9d7",
-              border: "solid #2E1F13 4px",
+              backgroundColor: "#BC4B51",
+              border: "solid #26B24D  2px",
               borderRadius: "12px",
             }}
             leftIcon={<BsFillPersonPlusFill />}

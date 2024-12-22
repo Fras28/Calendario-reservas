@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchComercio, fetchPrestadores, fetchReservas } from './components/redux/slice.jsx';
+import { fetchComercio,  fetchReservas } from './components/redux/slice.jsx';
 import Landing from './components/Landing/Landing.jsx';
 import EditUser from './components/Results/EditUser.jsx';
 import Exito from './components/Results/Exito.jsx';
@@ -31,7 +31,7 @@ const App = () => {
   useEffect(() => {
     dispatch(fetchComercio());
     dispatch(fetchReservas());
-    dispatch(fetchPrestadores());
+    // dispatch(fetchPrestadores());
   }, [dispatch]);
 
   return (

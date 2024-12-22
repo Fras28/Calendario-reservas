@@ -61,7 +61,7 @@
 /* -------------------- LANDING ----------------- */
 .cont-landing{
   padding: 1rem;
-  background-color: #E5B9D7;
+  background-color: #15334F;
 }
 
 
@@ -376,7 +376,7 @@
 /* --------------- Prestadores ------------------ */
 .bgPrestador {
   padding: 2rem;
-  border-bottom: solid 2px #6E5F83;
+  border-bottom: solid 2px white;
   position: relative;
 }
 
@@ -399,7 +399,7 @@
   border-radius: 50%;
   background-image: url("./components/assets/FondoLogo.jpg"); /* Color de fondo del círculo */
   z-index: 1; /* Asegúrate de que estén detrás de las cartas */
-  border: solid 2px #6E5E84; 
+  border: solid 2px #BC4B51; 
 }
 
 .circle-1 {
@@ -448,7 +448,7 @@ margin-top: 0 !important;
   flex-direction: column;
   align-items: center;
   border-radius: 12px;
-  border: solid 8px #2E1F13;
+  border: solid .5rem #26B24D ;
   background: #4a4a4a;
   overflow: hidden;
   background: rgb(87, 87, 87);

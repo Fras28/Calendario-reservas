@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
 
 const YOUR_PUBLIC_KEY = process.env.REACT_APP_PUBLIC_KEY_MP;
+const API_BACK = process.env.REACT_APP_API_URL;
 
 const CheckoutPro = ({ info, onPaymentSuccess }) => {
   const comercio = useSelector((state) => state.reservas.comercio);

@@ -179,7 +179,7 @@ const MobileNavItem = ({ label, children, href }) => {
         _hover={{
           textDecoration: 'none',
         }}>
-        <Text fontWeight={600} color={useColorModeValue('#E5B9D7', '#E5B9D7')}>
+        <Text fontWeight={600} color={useColorModeValue('white', '#white')}>
           {label}
         </Text>
         {children && (
@@ -228,14 +228,14 @@ const WithSubnavigation = () => {
   return (
     <Box>
       <Flex
-        bg={useColorModeValue('#88B9BF', 'gray.800')}
+        bg={useColorModeValue('#15334f', 'gray.800')}
         color={useColorModeValue('gray.600', 'white')}
         minH={'60px'}
         py={{ base: 2 }}
         px={{ base: 4 }}
         borderBottom={1}
         borderStyle={'solid'}
-        borderColor={useColorModeValue('#6E5E84', '#6E5E84')}
+        borderColor={useColorModeValue(' white', 'white')}
         align={'center'}>
        
         <Flex flex={{ base: 1 }} justify={{ base: 'center', md: 'start' }} align={'center'}>
@@ -285,7 +285,7 @@ const WithSubnavigation = () => {
             </Menu>
           ) : (
             <>
-              <Button as={Link} to="/login" fontSize={'sm'} fontWeight={400} variant={'link'} color={"#6C442B"}>
+              <Button as={Link} to="/login" fontSize={'sm'} fontWeight={400} variant={'link'} color={"white"}>
                 Ingresar
               </Button>
               <Button
@@ -294,11 +294,11 @@ const WithSubnavigation = () => {
                 display={{ base: 'inline-flex', md: 'inline-flex' }}
                 fontSize={'sm'}
                 fontWeight={600}
-                bgColor="#6E5E84"
-                border="dashed #2E1F13 4px"
-                color="#88B9BF"
+                bgColor=" #BC4B51"
+                border="solid #26B24D  1px"
+                color="white"
                 _hover={{
-                  border: "solid #2E1F13 4px",
+                  border: "solid #26B24D  1px",
                 }}
                 >
                 Registrarte

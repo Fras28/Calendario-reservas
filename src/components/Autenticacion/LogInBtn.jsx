@@ -7,13 +7,13 @@ const LogInBtn = () => {
     <Button
       as={RouterLink}
       to="/login"
-      bgColor="#6E5E84"
-      outline="solid #2E1F13 4px"
+      bgColor="#BC4B51"
+      outline="solid #26B24D  2px"
       color="#88B9BF"
       _hover={{
         bgColor: "#88B9BF",
-        color: "#6E5E84",
-        outline: "solid #6E5E84 4px",
+        color: "#BC4B51",
+        outline: "solid #BC4B51 4px",
       }}
     >
       Identificarte

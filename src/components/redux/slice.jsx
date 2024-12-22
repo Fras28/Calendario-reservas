@@ -15,15 +15,15 @@ const initialState = {
   status: 'idle',
   error: null,
 };
-export const fetchPrestadores = createAsyncThunk('reservas/fetchPrestadores', async () => {
-  try {
-    const response = await axios.get(`${API_URL}/api/prestadores?populate=avatar&populate=fondoPerfil&populate=valors&populate=horarios&populate=reservas`);
-    return response.data;
-  } catch (error) {
-    console.error('Error fetching prestadores:', error);
-    throw error;
-  }
-});
+// export const fetchPrestadores = createAsyncThunk('reservas/fetchPrestadores', async () => {
+//   try {
+//     const response = await axios.get(`${API_URL}/api/prestadores?populate=avatar&populate=fondoPerfil&populate=valors&populate=horarios&populate=reservas`);
+//     return response.data;
+//   } catch (error) {
+//     console.error('Error fetching prestadores:', error);
+//     throw error;
+//   }
+// });
 const removeToken = () => {
   localStorage.removeItem('token');
 };
@@ -42,7 +42,9 @@ export const logoutUser = createAsyncThunk('user/logout', async () => {
 
 export const fetchComercio = createAsyncThunk('reservas/fetchComercio', async () => {
   try {
-    const response = await axios.get(`${API_URL}/api/comercios/${COMERCIO_ID}`);
+    const response = await axios.get(
+      `${API_URL}/api/comercios/${COMERCIO_ID}?populate[logo][fields][0]=url&populate[logo][fields][1]=formats&populate[prestadors][populate][0]=avatar&populate[prestadors][populate][1]=fondoPerfil&populate[prestadors][populate][2]=valors&populate[prestadors][populate][3]=horarios&populate[prestadors][populate][4]=reservas`
+    );
     return response.data;
   } catch (error) {
     console.error('Error fetching comercio:', error);
@@ -370,17 +372,17 @@ const reservasSlice = createSlice({
       state.status = 'failed';
       state.error = action.error.message;
     })
-      .addCase(fetchPrestadores.pending, (state) => {
-        state.status = 'loading';
-      })
-      .addCase(fetchPrestadores.fulfilled, (state, action) => {
-        state.status = 'succeeded';
-        state.prestadores = action.payload.data;
-      })
-      .addCase(fetchPrestadores.rejected, (state, action) => {
-        state.status = 'failed';
-        state.error = action.error.message;
-      })
+      // .addCase(fetchPrestadores.pending, (state) => {
+      //   state.status = 'loading';
+      // })
+      // .addCase(fetchPrestadores.fulfilled, (state, action) => {
+      //   state.status = 'succeeded';
+      //   state.prestadores = action.payload.data;
+      // })
+      // .addCase(fetchPrestadores.rejected, (state, action) => {
+      //   state.status = 'failed';
+      //   state.error = action.error.message;
+      // })
       
       .addCase(fetchReservas.pending, (state) => {
         state.status = 'loading';
@@ -449,12 +451,15 @@ const reservasSlice = createSlice({
         state.status = 'failed';
         state.error = action.error.message;
       })
+      // Remove fetchPrestadores cases
       .addCase(fetchComercio.pending, (state) => {
         state.status = 'loading';
       })
       .addCase(fetchComercio.fulfilled, (state, action) => {
         state.status = 'succeeded';
-        state.comercio = action.payload; // Almacena la respuesta en el estado del comercio
+        state.comercio = action.payload;
+        // Extract prestadores from comercio data and update the prestadores state
+        state.prestadores = action.payload.data.attributes.prestadors.data;
       })
       .addCase(fetchComercio.rejected, (state, action) => {
         state.status = 'failed';

@@ -11,7 +11,7 @@ import store from './components/redux/store';
 const theme = extendTheme({
   colors: {
     brand: {
-      900: "#E5B9D7",
+      900: "white",
       800: "#88B9BF",
       700: "#2a69ac",
     },

@@ -70,7 +70,7 @@ export default function Historia() {
             boxShadow={"2xl"}
             width={"full"}
             overflow={"hidden"}
-            outline={"#E5B9D7 solid 4px"}
+            outline={"white solid 4px"}
           >
             <img
               src={Mai1}
@@ -103,7 +103,7 @@ export default function Historia() {
             boxShadow={"2xl"}
             width={"full"}
             overflow={"hidden"}
-            outline={"#E5B9D7 solid 4px"}
+            outline={"white solid 4px"}
           >
             <img
               src={Mai2}
