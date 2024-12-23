@@ -3,10 +3,13 @@ import { Parallax } from "react-parallax";
 import { Box, Button, Heading, Text, useMediaQuery } from "@chakra-ui/react";
 import { BsPersonPlusFill } from "react-icons/bs";
 import { Link as ScrollLink } from "react-scroll";
-import bgImg from "../assets/Padelhall.jpeg";
-import Prestadores from "../Prestadores";
+import bgImg from "../../assets/Padelhall.jpeg";
+import Prestadores from "../../Prestadores";
 import { useSelector, useDispatch } from "react-redux";
-import { fetchComercio } from "../redux/slice";
+import { fetchComercio } from "../../redux/slice";
+import TypingHero from "./TypHero";
+
+
 
 
 const HeroSection = () => {
@@ -31,6 +34,7 @@ const HeroSection = () => {
       alignItems="center"
       bg="rgba(255, 255, 255, 0.25)"
       minH="70vh"
+      w={"100%"}
     >
       <Box textAlign="center" color="white" position="relative">
         <Heading
@@ -44,7 +48,7 @@ const HeroSection = () => {
             justifyContent: "center",
           }}
         >
-          {logoUrl && (
+          {/* {logoUrl && (
             <img
               src={`${API_URL}${logoUrl}`}
               alt="Logo"
@@ -52,11 +56,12 @@ const HeroSection = () => {
               style={{ backgroundColor: "#000000b5", borderRadius: "50%" }}
               className="buttonHero"
             />
-          )}
+          )} */}
         </Heading>
         <Text fontSize="32px" mb="6" className="titMai">
           {comercioName || 'Cargando...'}
         </Text>
+          <TypingHero/>
         <ScrollLink to="prestadores" smooth={true} duration={500}>
           <Button
             bgColor="#BC4B51"
@@ -73,9 +78,9 @@ const HeroSection = () => {
             Hacer Reserva
           </Button>
         </ScrollLink>
-        <Text fontSize="l" mb="6">
+        {/* <Text fontSize="l" mb="6">
           {comercio?.data?.attributes?.direccion}
-        </Text>
+        </Text> */}
       </Box>
     </Box>
   );
@@ -92,6 +97,7 @@ const HeroSection = () => {
           display="flex"
           justifyContent="center"
           alignItems="center"
+          w={"100%"}
         >
           {content}
         </Box>

@@ -140,14 +140,14 @@ const Calendario = () => {
               {reservasFiltradas[fecha]?.map((reserva) => {
                 const colorClass = getColorClass(reserva);
                 return (
-                  <li key={reserva.id} className={`reserva ${colorClass}`}>
+                  <li key={reserva?.id} className={`reserva ${colorClass}`}>
                     {reserva.attributes.hora.slice(0, 5)}hs <br />{" "}
                     <b>Cliente:</b>{" "}
                     {reserva.attributes.nombreCliente || "No especificado"}
                     <IconButton
                       aria-label="Eliminar reserva"
                       icon={<DeleteIcon />}
-                      onClick={() => handleEliminar(reserva.id)}
+                      onClick={() => handleEliminar(reserva?.id)}
                       variant="outline"
                       colorScheme="red"
                       ml={4}

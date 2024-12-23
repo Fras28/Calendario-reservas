@@ -139,7 +139,7 @@ const renderHorariosPrestador = () => {
   }
 
   return horarios.map((horario) => (
-    <HStack key={horario.id} justifyContent="space-between" width="100%">
+    <HStack key={horario?.id} justifyContent="space-between" width="100%">
       <VStack align="start">
         <Text>{`${horario.attributes.diaSemana}: ${formatTimeForDisplay(
           horario.attributes.horaInicio
@@ -152,7 +152,7 @@ const renderHorariosPrestador = () => {
         </Text>
       </VStack>
       <Button
-        onClick={() => handleDeleteHorario(horario.id)}
+        onClick={() => handleDeleteHorario(horario?.id)}
         style={{ border: "solid red 2px" }}
       >
         Eliminar
@@ -170,7 +170,7 @@ const renderHorariosPrestador = () => {
         onChange={handlePrestadorChange}
       >
         {prestadores.map((prestador) => (
-          <option key={prestador.id} value={prestador.id}>
+          <option key={prestador.id} value={prestador?.id}>
             {prestador.attributes.nombre}
           </option>
         ))}

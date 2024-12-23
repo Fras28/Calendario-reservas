@@ -36,7 +36,7 @@ const Categorias = () => {
     <div style={styles.container}>
       <div style={styles.container2}>
       {categorias.map((categoria, index) => (
-        <div key={categoria.id} style={{ ...styles.card, backgroundImage: `url(${categoria.imagen})` }}>
+        <div key={categoria?.id} style={{ ...styles.card, backgroundImage: `url(${categoria.imagen})` }}>
           <h3 style={styles.title}>{categoria.titulo}</h3>
         </div>
       ))}

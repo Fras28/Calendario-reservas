@@ -28,7 +28,7 @@ const diasHorarios = ({ prestador, setSelectedDia, setSelectedHora }) => {
           <FormLabel>Horario</FormLabel>
           <Select placeholder="Seleccione el horario" onChange={(e) => setSelectedHora(e.target.value)}>
             {prestador.attributes.horarios.data.map((horario) => (
-              <option key={horario.id} value={`${horario.attributes.horaInicio} - ${horario.attributes.horaFin}`}>
+              <option key={horario?.id} value={`${horario.attributes.horaInicio} - ${horario.attributes.horaFin}`}>
                 {horario.attributes.diaSemana} - {horario.attributes.horaInicio} a {horario.attributes.horaFin}
               </option>
             ))}

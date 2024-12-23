@@ -69,6 +69,10 @@ const NAV_ITEMS = [
   // },
 ];
 
+
+const API_URL = process.env.REACT_APP_API_URL;
+
+
 const DesktopNav = () => {
   const linkColor = useColorModeValue('gray.600', 'gray.200');
   const linkHoverColor = useColorModeValue('gray.800', 'white');
@@ -217,8 +221,11 @@ const WithSubnavigation = () => {
   const { isOpen, onToggle } = useDisclosure();
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { user, token } = useSelector((state) => state.reservas);
+  const { user, token, comercio } = useSelector((state) => state.reservas);
   const role = useSelector((state) => state?.reservas?.role);
+
+  const logoUrl = comercio?.data?.attributes?.logo?.data?.attributes?.url;
+  const comercioName = comercio?.data?.attributes?.nombre;
 
   const handleLogout = () => {
     dispatch(logout());
@@ -228,18 +235,26 @@ const WithSubnavigation = () => {
   return (
     <Box>
       <Flex
-        bg={useColorModeValue('#15334f', 'gray.800')}
-        color={useColorModeValue('gray.600', 'white')}
+        bg={useColorModeValue('#F8F8F8', 'gray.800')}
+        color={useColorModeValue('gray.600', '#15334f')}
         minH={'60px'}
         py={{ base: 2 }}
         px={{ base: 4 }}
-        borderBottom={1}
+        // borderBottom={1}
         borderStyle={'solid'}
-        borderColor={useColorModeValue(' white', 'white')}
+        borderColor={useColorModeValue(' #15334f', '#15334f')}
         align={'center'}>
        
-        <Flex flex={{ base: 1 }} justify={{ base: 'center', md: 'start' }} align={'center'}>
-          <img src={Logo} style={{ height: "80px" }} alt="Logo" />
+        <Flex flex={{ base: 1 }} justify={{ base: 'center', md: 'start' }} align={'center'} justifyContent={"flex-start"}>
+        {logoUrl && (
+            <img
+              src={`${API_URL}${logoUrl}`}
+              alt="Logo"
+              width="44px"
+              style={{ backgroundColor: "#000000b5", borderRadius: "50%" }}
+             
+            />
+          )}
           
           {role?.name === 'Admin' && (
             <Tooltip label="Panel de Administrador" placement="bottom">
@@ -285,7 +300,7 @@ const WithSubnavigation = () => {
             </Menu>
           ) : (
             <>
-              <Button as={Link} to="/login" fontSize={'sm'} fontWeight={400} variant={'link'} color={"white"}>
+              <Button as={Link} to="/login" fontSize={'sm'} fontWeight={600} variant={'link'} color={"#15334f"}>
                 Ingresar
               </Button>
               <Button

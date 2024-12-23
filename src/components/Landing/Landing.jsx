@@ -1,12 +1,13 @@
 import React from "react";
 import WithSubnavigation from "./NavBar";
-import HeroSection from "./Hero";
+
 import Historia from "./Historia";
 import Testim from "./Testimonios1";
 import LargeWithAppLinksAndSocial from "../Foot";
 import { BiBorderRadius } from "react-icons/bi";
 import SignInBtn from "../Autenticacion/signInBtn";
 import LogInBtn from "../Autenticacion/LogInBtn";
+import HeroSection from "./Hero/Hero";
 
 
 

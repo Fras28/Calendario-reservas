@@ -40,8 +40,15 @@ const NuevaReserva = ({ prestador, precio = '{"precio": 0, "tiempo": 0}' }) => {
   const [messages, setMessages] = useState({ success: "", error: "" });
   const [availableDates, setAvailableDates] = useState([]);
   const [unavailableDates, setUnavailableDates] = useState([]);
-  const [availableHours, setAvailableHours] = useState(["99:99"]);
+  const [availableHours, setAvailableHours] = useState(["completo"]);
   const [unavailableHours, setUnavailableHours] = useState([]);
+
+  const formatDateToYYYYMMDD = (date) => {
+    if (!date) return "";
+    const d = new Date(date);
+    return d.toISOString().split('T')[0];
+  };
+
 
   const HoraSelector = ({ horas, horaSeleccionada, onChange }) => {
     // Eliminar duplicados usando un Set
@@ -85,7 +92,7 @@ const NuevaReserva = ({ prestador, precio = '{"precio": 0, "tiempo": 0}' }) => {
     if (!formData.prestador) return;
 
     const selectedPrestador = prestadores.find(
-      (p) => p.id === parseInt(formData.prestador)
+      (p) => p?.id === parseInt(formData.prestador)
     );
     if (!selectedPrestador) return;
 
@@ -96,24 +103,13 @@ const NuevaReserva = ({ prestador, precio = '{"precio": 0, "tiempo": 0}' }) => {
     for (let i = 0; i < 30; i++) {
       const date = new Date(today);
       date.setDate(today.getDate() + i);
-      const dateString = date.toISOString().split("T")[0]; // YYYY-MM-DD format
+      const dateString = formatDateToYYYYMMDD(date);
 
       const hasAvailableHorario =
         selectedPrestador.attributes.horarios.data.some((horario) => {
           const horarioStart = new Date(horario.attributes.fechaInicio);
           const horarioEnd = new Date(horario.attributes.fechaFin);
-          const isWithinDateRange = date >= horarioStart && date <= horarioEnd;
-
-          if (isWithinDateRange) {
-            const horaInicio = new Date(
-              `${dateString}T${horario.attributes.horaInicio}`
-            );
-            const horaFin = new Date(
-              `${dateString}T${horario.attributes.horaFin}`
-            );
-            return horaFin > horaInicio; // Check if there's actually time available on this day
-          }
-          return false;
+          return date >= horarioStart && date <= horarioEnd;
         });
 
       if (hasAvailableHorario) {
@@ -176,13 +172,15 @@ const NuevaReserva = ({ prestador, precio = '{"precio": 0, "tiempo": 0}' }) => {
   };
 
   const handleDateChange = (date) => {
-    setFormData({ ...formData, fecha: date });
+    const formattedDate = formatDateToYYYYMMDD(date);
+    setFormData({ ...formData, fecha: formattedDate });
     setAvailableHours([]);
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (isHourReserved(formData.fecha, `${formData.hora}:00.000`)) {
+    const formattedDate = formatDateToYYYYMMDD(formData.fecha);
+    if (isHourReserved(formattedDate, `${formData.hora}:00.000`)) {
       setMessages({
         success: "",
         error: "Este horario ya está reservado. Por favor, elige otro.",
@@ -191,7 +189,12 @@ const NuevaReserva = ({ prestador, precio = '{"precio": 0, "tiempo": 0}' }) => {
     }
     try {
       const horaFormateada = `${formData.hora}:00.000`;
-      await dispatch(createReserva({ ...formData, hora: horaFormateada }));
+      await dispatch(createReserva({ 
+        ...formData, 
+        fecha: formattedDate,
+        hora: horaFormateada,
+        precio: Number(selectedPrice.precio) // Ensure precio is a number
+      }));
       setMessages({ success: "¡Reserva realizada con Éxito!", error: "" });
     } catch (error) {
       setMessages({
@@ -200,6 +203,7 @@ const NuevaReserva = ({ prestador, precio = '{"precio": 0, "tiempo": 0}' }) => {
       });
     }
   };
+
 
   const handlePaymentSuccess = async () => {
     try {
@@ -217,7 +221,7 @@ const NuevaReserva = ({ prestador, precio = '{"precio": 0, "tiempo": 0}' }) => {
   const telefonoPrestador = "542915729501";
   const handleWhatsApp = () => {
     const prestadorSeleccionado = prestadores.find(
-      (p) => p.id === formData.prestador
+      (p) => p?.id === formData.prestador
     );
     const nombrePrestador = prestadorSeleccionado?.attributes?.nombre || "";
     const message = `¡Hola! Quiero confirmar mi reserva:\n\nNombre: ${formData.nombreCliente}\nEmail: ${formData.email}\nFecha: ${formData.fecha}\nHora: ${formData.hora}\nPrestador: ${nombrePrestador}\nPrecio: $${selectedPrice.precio}\nDuración: ${selectedPrice.tiempo} minutos`;
@@ -232,7 +236,7 @@ const NuevaReserva = ({ prestador, precio = '{"precio": 0, "tiempo": 0}' }) => {
     const reservasDelDia = reservas?.filter(
       (reserva) =>
         reserva.attributes.fecha === dateString &&
-        reserva.attributes.prestador.data.id === parseInt(formData.prestador)
+        reserva.attributes.prestador.data?.id === parseInt(formData.prestador)
     );
     return reservasDelDia?.length >= maxReservasPorDia;
   };
@@ -244,7 +248,7 @@ const NuevaReserva = ({ prestador, precio = '{"precio": 0, "tiempo": 0}' }) => {
       (reserva) =>
         reserva.attributes.fecha === dateString &&
         reserva.attributes.hora === hour &&
-        reserva.attributes.prestador.data.id === parseInt(formData.prestador)
+        reserva.attributes.prestador.data?.id === parseInt(formData.prestador)
     );
   };
 

@@ -61,7 +61,7 @@
 /* -------------------- LANDING ----------------- */
 .cont-landing{
   padding: 1rem;
-  background-color: #15334F;
+  background-color: #F8F8F8;
 }
 
 
@@ -376,7 +376,7 @@
 /* --------------- Prestadores ------------------ */
 .bgPrestador {
   padding: 2rem;
-  border-bottom: solid 2px white;
+  border-bottom: solid 2px #15334f;
   position: relative;
 }
 
@@ -394,12 +394,12 @@
 
 .circle {
   position: absolute;
-  width: 250px; /* Ajusta según tus necesidades */
-  height: 250px; /* Ajusta según tus necesidades */
+  width: 180px; /* Ajusta según tus necesidades */
+  height: 180px; /* Ajusta según tus necesidades */
   border-radius: 50%;
-  background-image: url("./components/assets/FondoLogo.jpg"); /* Color de fondo del círculo */
+  background-color:rgb(209, 209, 16);
   z-index: 1; /* Asegúrate de que estén detrás de las cartas */
-  border: solid 2px #BC4B51; 
+
 }
 
 .circle-1 {
@@ -437,8 +437,8 @@ margin-top: 0 !important;
   padding: 1rem;
 }
 .card {
-  --main-color: #000;
-  --submain-color: #78858f;
+  --main-color: #15334f;
+  --submain-color: #15334f;
   --bg-color: #fff;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
     Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
@@ -449,14 +449,8 @@ margin-top: 0 !important;
   align-items: center;
   border-radius: 12px;
   border: solid .5rem #26B24D ;
-  background: #4a4a4a;
+  background: #15334f;
   overflow: hidden;
-  background: rgb(87, 87, 87);
-  background: linear-gradient(
-    94deg,
-    rgba(87, 87, 87, 1) 0%,
-    rgba(87, 87, 87, 1) 100%
-  );
   padding-bottom: .5rem;
   box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
   perspective: 1000px;
@@ -631,7 +625,7 @@ margin-top: 0 !important;
 
 .css-cs9aj7 {
   gap: var(--chakra-space-10);
-  background-color: #88b9bf6e;
+  background-color: #15334f;
   padding: 1rem;
   border-radius: 12px;
 }

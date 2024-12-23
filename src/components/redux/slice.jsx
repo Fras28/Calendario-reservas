@@ -217,10 +217,10 @@ export const setHorariosPrestador = createAsyncThunk(
         if (existingHorario) {
           // Si el horario ya existe, se actualiza
           horariosToUpdate.push({
-            id: existingHorario.id,
+            id: existingHorario?.id,
             data: horario
           });
-          horariosToDelete.delete(existingHorario.id);
+          horariosToDelete.delete(existingHorario?.id);
         } else {
           // Si el horario no existe, se crea
           horariosToCreate.push(horario);
@@ -492,7 +492,7 @@ const reservasSlice = createSlice({
         const { prestadorId, horarioId } = action.payload;
         if (state.horariosPrestador[prestadorId]) {
           state.horariosPrestador[prestadorId] = state.horariosPrestador[prestadorId].filter(
-            (horario) => horario.id !== horarioId
+            (horario) => horario?.id !== horarioId
           );
         }
       })
